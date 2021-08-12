@@ -10,5 +10,5 @@ const mySchema = new Schema({
   date: { type: Date, required: true },
 });
 
-const model = mongoose.model("Messages", mySchema);
+const model = mongoose.model("Message", mySchema);
 module.exports = model;
