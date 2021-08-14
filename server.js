@@ -1,11 +1,13 @@
 const express = require("express");
-const router = require("./network/routes");
-const db = require("./db");
+const app = express();
+const server = require("http").Server(app);
 
+const router = require("./network/routes");
+const socket = require("./socket");
+const db = require("./db");
 require("dotenv").config();
 
 db(process.env.DB_URI);
-var app = express();
 
 app.use(express.json());
 app.use(
@@ -14,6 +16,7 @@ app.use(
   })
 );
 //app.use(router);
+socket.connect(server);
 router(app);
 // app.use("/", function (request, response) {
 //   response.send("Hola");
@@ -21,8 +24,9 @@ router(app);
 
 app.use("/app", express.static("./public"));
 
-app.listen(3000);
-console.log("La aplicacion esta escuchando en http://localhost:3000");
+server.listen(3000, function () {
+  console.log("La aplicacion esta escuchando en http://localhost:3000");
+});
 
 /*router.get("/", function (request, response) {
   CACHEANDO INFO DEL BODY Y QUERY

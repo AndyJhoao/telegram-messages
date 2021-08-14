@@ -1,9 +1,24 @@
 const express = require("express");
+const format = require("date-fns/format");
 const res = require("../../network/response");
 const controller = require("../message/controller");
+const multer = require("multer");
 const router = express.Router();
 
-router.get("/", function (request, response) {
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads");
+  },
+  filename: function (req, file, cb) {
+    const [nombre, extension] = file.originalname.split(".");
+    cb(null, nombre + "-" + format(new Date(), "yyyy-MM-dd") + extension);
+  },
+});
+const upload = multer({
+  storage,
+});
+
+router.get("/:chat", function (request, response) {
   controller
     .getMessages(request.query.user || null)
     .then((listMessage) => {
@@ -13,9 +28,9 @@ router.get("/", function (request, response) {
       res.error(request, response, "Error interno", 400, err);
     });
 });
-router.post("/", function (request, response) {
+router.post("/", upload.single("file"), function (request, response) {
   controller
-    .addMessage(request.body.user, request.body.message)
+    .addMessage(request.body.user, request.body.message, request.body.chat)
     .then((fullMessage) => {
       res.success(request, response, fullMessage, 201);
     })

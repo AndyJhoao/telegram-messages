@@ -14,9 +14,12 @@
   "author": "Andy Jhoao <andy_joao@live.com>",
   "license": "ISC",
   "dependencies": {
+    "date-fns": "^2.23.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.13.6",
-    "nodemon": "^2.0.12"
+    "multer": "^1.4.3",
+    "nodemon": "^2.0.12",
+    "socket.io": "^4.1.3"
   }
 }
