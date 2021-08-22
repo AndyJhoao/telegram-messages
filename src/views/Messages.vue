@@ -4,11 +4,18 @@
       <top-bar back :user="user">
         {{ userChat }}
       </top-bar>
-      <Mikepad class="sizeLoader center" :size="140" v-if="!isLoading" />
-      <div class="messages spacing" v-if="isLoading">
-        <div class="spaceMessages" v-for="message in $store.state.messages.list" :key="message._id">
-          <b v-if="userChat === message.user.name || userChat === ''">{{ message.user.name }} : </b>
-          <b v-if="userChat !== message.user.name && userChat !== ''">Tú : </b>{{ message.message }}
+
+      <div class="messages spacing">
+        <div
+          class="spaceMessages"
+          v-for="message in $store.state.messages.list"
+          :key="message._id"
+        >
+          <b v-if="userChat === message.user.name || userChat === ''"
+            >{{ message.user.name }} :
+          </b>
+          <b v-if="userChat !== message.user.name && userChat !== ''">Tú : </b
+          >{{ message.message }}
         </div>
       </div>
     </div>
@@ -21,23 +28,21 @@
 
 <script>
 // @ is an alias to /src
-import Mikepad from 'vue-loading-spinner/src/components/Mikepad.vue';
-import TopBar from '@/components/TopBar.vue';
+import TopBar from "@/components/TopBar.vue";
 // import ChatList from '@/components/ChatList.vue';
 
 export default {
-  name: 'Chat',
+  name: "Chat",
   components: {
     TopBar,
     // ChatList,
-    Mikepad,
   },
   data: () => ({
     chatId: null,
-    newMessage: '',
-    userChat: '',
+    newMessage: "",
+    userChat: "",
     isLoading: false,
-    user: '',
+    user: "",
   }),
   computed: {
     chat() {
@@ -52,7 +57,7 @@ export default {
   methods: {
     sendMessage() {
       // console.log(this.$store.state.user);
-      this.$store.dispatch('messages/sendMessage', {
+      this.$store.dispatch("messages/sendMessage", {
         message: this.newMessage,
         chat: this.$route.params.id,
         user: this.$store.state.user.selected,
@@ -61,13 +66,13 @@ export default {
         //   name: this.$store.state.user.selected.name
         // }
       });
-      this.newMessage = '';
+      this.newMessage = "";
     },
     renameChat(userChatName) {
       if (userChatName.length === 1) {
         this.userChat = userChatName[0].name;
       } else if (userChatName.length > 1) {
-        let grupo = '';
+        let grupo = "";
         const users = this.userChat.map((user) => {
           grupo = `${grupo}, ${user.name}`;
           return grupo;
@@ -77,12 +82,12 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('messages/getMessages', this.$route.params.id);
+    this.$store.dispatch("messages/getMessages", this.$route.params.id);
     this.renameChat(this.$route.params.userWichID || []);
     setTimeout(() => {
       this.isLoading = !this.isLoading;
     }, 1000);
-    this.user = this.$route.params.userLogin[0].name || '';
+    this.user = this.$route.params.userLogin[0].name || "";
   },
 };
 </script>

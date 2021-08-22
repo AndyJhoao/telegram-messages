@@ -2,25 +2,24 @@
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <top-bar>App de Mensajes</top-bar>
-    <Mikepad class="sizeLoader center" :size="140" v-if="!isLoading" />
-    <user-list v-if="isLoading" />
+
+    <user-list />
     <!-- <new-chat /> -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Mikepad from 'vue-loading-spinner/src/components/Mikepad.vue';
-import TopBar from '@/components/TopBar.vue';
-import UserList from '@/components/UserList.vue';
+
+import TopBar from "@/components/TopBar.vue";
+import UserList from "@/components/UserList.vue";
 // import ChatList from '@/components/ChatList.vue';
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
     TopBar,
     UserList,
-    Mikepad,
     // ChatList,
   },
   data() {
