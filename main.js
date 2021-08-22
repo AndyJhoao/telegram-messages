@@ -27,7 +27,7 @@ router(app);
 app.use("/", express.static("./public"));
 
 server.listen(3000, function () {
-  console.log("La aplicacion esta escuchando en http://localhost:3000");
+  console.log("La aplicacion esta escuchando en " + process.env.URL);
 });
 
 /*router.get("/", function (request, response) {
