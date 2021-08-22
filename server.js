@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const server = require("http").Server(app);
+const cors = require("cors");
 
 const router = require("./network/routes");
 const socket = require("./socket");
@@ -9,6 +10,7 @@ require("dotenv").config();
 
 db(process.env.DB_URI);
 
+app.use(cors());
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -22,7 +24,7 @@ router(app);
 //   response.send("Hola");
 // });
 
-app.use("/app", express.static("./public"));
+app.use("/", express.static("./public"));
 
 server.listen(3000, function () {
   console.log("La aplicacion esta escuchando en http://localhost:3000");

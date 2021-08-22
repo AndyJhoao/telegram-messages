@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", function (request, response) {
   controller
-    .getUsers(request.query.name)
+    .getUsers(request.query.name || "")
     .then((listUsers) => {
       res.success(request, response, listUsers, 200);
     })

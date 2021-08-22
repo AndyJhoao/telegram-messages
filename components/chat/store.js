@@ -1,4 +1,3 @@
-const { populate } = require("./model");
 const Model = require("./model");
 
 function addChat(arrayUsers) {

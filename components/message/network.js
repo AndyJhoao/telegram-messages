@@ -18,9 +18,9 @@ const upload = multer({
   storage,
 });
 
-router.get("/:chat", function (request, response) {
+router.get("/", function (request, response) {
   controller
-    .getMessages(request.query.user || null)
+    .getMessages(request.query.chat || null)
     .then((listMessage) => {
       res.success(request, response, listMessage, 200);
     })

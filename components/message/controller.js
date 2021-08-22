@@ -9,6 +9,9 @@ function addMessage(user, message, chat) {
       console.log("[MessageController]: No hay usuario o mensaje o chat");
       return reject("Los datos son incorrectos");
     }
+    // console.log(
+    //   "user = " + user + ",message = " + message + ", chat = " + chat
+    // );
     const fullMessage = {
       chat,
       user,

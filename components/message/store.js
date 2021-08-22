@@ -9,7 +9,7 @@ function getMessage(userFilter) {
   return new Promise((resolve, reject) => {
     let filter = {};
     if (userFilter !== null) {
-      filter = { user: userFilter };
+      filter = { chat: userFilter };
     }
     const messages = Model.find(filter)
       .populate("user")
