@@ -6,6 +6,7 @@ const cors = require("cors");
 const router = require("./network/routes");
 const socket = require("./socket");
 const db = require("./db");
+const port = process.env.PORT || 5000;
 require("dotenv").config();
 
 db(process.env.DB_URI);
@@ -26,8 +27,13 @@ router(app);
 
 app.use("/", express.static("./public"));
 
-server.listen(5000, function () {
-  console.log("La aplicacion esta escuchando en " + process.env.URL);
+server.listen(port, function () {
+  console.log(
+    "La aplicacion esta escuchando en " +
+      process.env.URL +
+      ":" +
+      process.env.PORT
+  );
 });
 
 /*router.get("/", function (request, response) {
